@@ -1,14 +1,15 @@
 import { renderComponent , expect } from '../test_helper';
 import App from '../../src/components/app';
 
-describe('App' , () => {
-  let component;
+// 'Describe' groups similar tests
+describe('Test the app component', () => {
 
-  beforeEach(() => {
-    component = renderComponent(App);
-  });
+	// Use 'it' to test single attribute of target
+	it('Shows the correct text', () => {
 
-  it('renders something', () => {
-    expect(component).to.exist;
-  });
+		// Use 'expect' to assert something about a target
+		expect
+
+	})
+
 });
