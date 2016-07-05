@@ -31,6 +31,8 @@ describe('Test the comment_box component', () => {
 		});
 
 		it('Is cleared when submitted', () => {
+			component.simulate('submit');
+			expect(component.find('textarea')).to.have.value('');
 
 		});
 
