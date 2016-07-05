@@ -3,14 +3,13 @@ import App from '../../src/components/app';
 
 // 'Describe' groups similar tests
 describe('Test the app component', () => {
+	let component = renderComponent(App);
 
 	// Use 'it' to test single attribute of target
-	it('Shows the correct text', () => {
-		//Create App instance
-		const component = renderComponent(App);
+	it('Displays the comment box', () => {
 		// Use 'expect' to assert something about a target
-		expect(component).to.contain('Starting React!');
+		expect(component.find('.comment-box'));
 
-	})
+	});
 
 });
