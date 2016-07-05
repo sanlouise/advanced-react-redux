@@ -27,7 +27,7 @@ describe('Test the comment_box component', () => {
 		});
 
 		it('Shows entered text', () => {
-			expect(component.find('textarea').to.have.value('New Comment');
+			expect(component.find('textarea')).to.have.value('New Comment');
 		});
 
 		it('Is cleared when submitted', () => {
