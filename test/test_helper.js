@@ -15,11 +15,12 @@ global.window = global.document.defaultView;
 //reach out and find the DOM, but to just be responsible for the fake DOM we just created.
 const $ = jquery(global.window);
 
-// Build 'renderComponent' helper to render react class
+// Build 'renderComponent' helper to render react class.
+// We need state because comment_list is connected to redux.
 function renderComponent(ComponentClass, props, state) {
 	const componentInstance = TestUtils.renderIntoDocument(
-		<Provider store={createStore(reducers)}>
-			<ComponentClass />
+		<Provider store={createStore(reducers, state)}>
+			<ComponentClass {...props} />
 		</Provider>
 	);
 	return $(ReactDOM.findDOMNode(componentInstance)); //produces HTML
