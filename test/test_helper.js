@@ -1,12 +1,13 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux' 
 import jsdom from 'jsdom';
-import ReactDOM from 'react-dOM';
 import jquery from 'jquery';
 import TestUtils from 'react-addons-test-utils';
-import { expect } from 'chai';
+import ReactDOM from 'react-dom';
+import chai, { expect } from 'chai';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import reducers from '../src/reducers';
+import chaiJquery from 'chai-jquery';
 
 // Set up testing environment to run like browser in command line
 global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
@@ -18,17 +19,26 @@ const $ = jquery(global.window);
 // Build 'renderComponent' helper to render react class.
 // We need state because comment_list is connected to redux.
 function renderComponent(ComponentClass, props, state) {
-	const componentInstance = TestUtils.renderIntoDocument(
-		<Provider store={createStore(reducers, state)}>
-			<ComponentClass {...props} />
-		</Provider>
-	);
-	return $(ReactDOM.findDOMNode(componentInstance)); //produces HTML
+  const componentInstance = TestUtils.renderIntoDocument(
+    <Provider store={createStore(reducers, state)}>
+      <ComponentClass {...props} />
+    </Provider>
+  );
+
+  return $(ReactDOM.findDOMNode(componentInstance)); // produces HTML
+}
+// Build helper to simulate events
+//This[0] to trigger the helper in the first array element
+//val is jQuery method
+$.fn.simulate = function(eventName, value) {
+  if (value) {
+    this.val(value);
+  }
+  TestUtils.Simulate[eventName](this[0]);
 }
 
 
-// Build helper to simulate events
 
 // Set up chai-jquery
-
+chaiJquery(chai, chai.util, $);
 export { renderComponent, expect };
